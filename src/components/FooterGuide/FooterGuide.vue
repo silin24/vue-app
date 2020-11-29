@@ -1,5 +1,5 @@
 <template>
-    <div class="footer-guide">
+    <div class="footer-guide" >
     <span class="guide-item " :class="{on: $route.path==='/msite'}" @click="goto('/msite')">
       <span>
         <i class="iconfont icon-waimai"></i>
@@ -32,8 +32,17 @@
         name: "FooterGuide",
         methods : {
             //编程式路由导航
+            // goto(path){
+            //     if (path!==this.$route.path){
+            //         this.$router.replace(path)
+            //     }
+            // }
             goto(path){
-                this.$router.replace(path)
+                if (path!==this.$route.path){
+                    this.$router.replace(path)
+                }else {
+                    window.location = path  //一般的http请求,会导致页面刷新显示
+                }
             }
         }
     };
@@ -50,6 +59,7 @@
         bottom: 0
         height: 50px
         width 100%
+        background-color: #fff
 
         .guide-item
             display flex
