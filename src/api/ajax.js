@@ -12,6 +12,7 @@
 
 import axios from 'axios'
 import qs from 'querystring'
+import {Indicator} from 'mint-ui'
 
 const instance = axios.create({
     timeout: 20000,
@@ -21,6 +22,9 @@ const instance = axios.create({
 })
 //请求拦截器
 instance.interceptors.request.use((config)=>{
+
+    Indicator.open()
+
     const data = config.data
     if (data instanceof Object) {
         const data = qs.stringify(data)
@@ -33,10 +37,12 @@ instance.interceptors.request.use((config)=>{
 //响应连接器
 instance.interceptors.response.use(
     response => {
+        Indicator.close()
         return response.data
     },
     error => {
 //1. 统一处理请求异常  ,返回一个pending状态的promise
+        Indicator.close()
         return new Promise(() => {})
     }
 )
