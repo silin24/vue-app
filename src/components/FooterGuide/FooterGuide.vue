@@ -33,7 +33,7 @@
         methods : {
             //编程式路由导航
             goto(path){
-                this.$router.replace(path)
+              path!==this.$route.path && this.$router.replace(path)
             }
         }
     };
@@ -50,6 +50,7 @@
         bottom: 0
         height: 50px
         width 100%
+        background-color: #fff
 
         .guide-item
             display flex
