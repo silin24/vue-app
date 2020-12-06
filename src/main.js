@@ -4,11 +4,13 @@ import router from './router'
 import Header from './components/Header/Header'
 import store from './vuex/store'
 import * as API from './api'
+import './Mock/mockServer'
 
-
+import { Button } from 'mint-ui'
 import 'lib-flexible'
 import './veeValidate'
 Vue.prototype.$API = API
+Vue.component(Button.name, Button)
 Vue.component('Header',Header)
 new Vue({
   // components: {

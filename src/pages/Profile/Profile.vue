@@ -90,12 +90,16 @@
           </div>
         </a>
       </section>
+<!--      <button @click="logout">退出登录</button>-->
+      <mt-button style="width: 100%" type="danger" @click="logout">退出登录</mt-button>
     </section>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import { MessageBox } from 'mint-ui';
   import {mapState} from 'vuex'
+  import {LOGOUT} from "../../vuex/mutations-type";
 
   export default {
     computed: {
@@ -106,6 +110,16 @@
     methods:{
       toLogin(){
         !!this.user._id || this.$router.replace('/login')
+      },
+      logout(){
+        // if (confirm('确定退出吗?')){
+        //   this.$store.commit(LOGOUT)
+        // }
+        MessageBox.confirm('确定退出吗')
+          .then(
+              actionAgree => this.$store.commit(LOGOUT),
+              actionReject => console.log('取消退出')
+          )
       }
     }
   }
